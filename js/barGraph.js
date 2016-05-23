@@ -1,6 +1,8 @@
+function drawBarGraph(inputJSON){
 //Defining the D3 margin
-var margin={ top:60, right:30, bottom: 100, left:100},
-    width=900 - margin.right-margin.left,
+console.log("inputJSON="+JSON.stringify(inputJSON));
+var margin={ top:60, right:20, bottom: 60, left:100},
+    width=920 - margin.right-margin.left,
     height=500- margin.top-margin.bottom;
 //define svg
 var svg_population=d3.select('#population')
@@ -10,7 +12,7 @@ var svg_population=d3.select('#population')
         "height": height + margin.top + margin.bottom
         })
         .append('g')
-            .attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
+        .attr("transform", "translate(" + margin.left + ',' + margin.right + ')');
 //Scale and Axis
 var xScale=d3.scale.ordinal()
 .rangeRoundBands([0,width], 0.1);
@@ -24,10 +26,10 @@ var yAxis=d3.svg.axis()
     .scale(yScale)
     .orient("left");
 //Getting JSON data
-d3.json("output/ageWiseLiteratePopulation.json", function(error, data){
-    if(error){
-    console.log("Error");
-    }
+
+  data=inputJSON;
+  console.log("inside d3=>"+data);
+
     data.forEach(function(d){
         d.population=+ d.population;
         d.ageGroup=d.ageGroup;
@@ -100,4 +102,5 @@ svg_population.append("g")
     .attr("dy", "-0.25em")
     .style("text-anchor","end")
     .style("font-size", "12px");
-});
+
+}

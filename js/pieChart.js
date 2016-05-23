@@ -1,8 +1,6 @@
+function drawPieChart(educationCategoryWiseJSON){
 var sales=[];
-d3.json("output/educationCategoryWiseJSON.json", function(error, data){
-    if(error){
-    console.log("Error");
-    }
+data=educationCategoryWiseJSON;
     data.forEach(function(d){
         d.catPopulation= d.catPopulation;
         d.eduCat=d.eduCat;
@@ -84,4 +82,4 @@ svgPie.append('g')
 	.text(function (d){return '- '+ d.data.eduCat + ' ('+ d.data.catPopulation+')'})
 	.attr('fill' , function(d){return color(d.data.eduCat);})
 .attr('y',function(d,i){return 20*(i+1);})
-});
+}
